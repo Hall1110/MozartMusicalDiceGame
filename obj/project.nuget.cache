@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "zBPMZGNsxQM=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\HFGF\\source\\repos\\MozartMusicalDiceGame\\MozartMusicalDiceGame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\HFGF\\.nuget\\packages\\system.windows.extensions\\8.0.0\\system.windows.extensions.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
