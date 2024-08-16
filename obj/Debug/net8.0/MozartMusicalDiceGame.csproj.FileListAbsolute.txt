@@ -16,3 +16,4 @@ C:\Users\HFGF\source\repos\MozartMusicalDiceGame\obj\Debug\net8.0\refint\MozartM
 C:\Users\HFGF\source\repos\MozartMusicalDiceGame\obj\Debug\net8.0\MozartMusicalDiceGame.pdb
 C:\Users\HFGF\source\repos\MozartMusicalDiceGame\obj\Debug\net8.0\MozartMusicalDiceGame.genruntimeconfig.cache
 C:\Users\HFGF\source\repos\MozartMusicalDiceGame\obj\Debug\net8.0\ref\MozartMusicalDiceGame.dll
+C:\Users\HFGF\source\repos\MozartMusicalDiceGame\obj\Debug\net8.0\MozartMusicalDiceGame.sourcelink.json

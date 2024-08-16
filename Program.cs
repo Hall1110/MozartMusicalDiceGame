@@ -5,17 +5,17 @@ namespace MozartMusicalDiceGame
 {
     internal class Program
     {
+        
+        
         static void Main(string[] args)
         {
             ProgramRunning();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")] // For at fjerne ligegyldige "soft errors"
 
         static void ProgramRunning()
         {
             bool isProgramRunning = true;
-            int i, s;
             int menuetLength = 16;
             int trioLength = 16;
             string[] menuetPathArray = new string[menuetLength];
@@ -23,11 +23,7 @@ namespace MozartMusicalDiceGame
             string[] trioPathArray = new string[trioLength];
             string[] trioFileArray = new string[trioLength];
 
-            string currentDirectory = Directory.GetCurrentDirectory();
-            Dice dice = new Dice();
-            SoundPlayer player = new SoundPlayer();
-
-
+            
 
             while (isProgramRunning)
             {
@@ -77,57 +73,11 @@ namespace MozartMusicalDiceGame
                 }
                 Console.WriteLine("\nPlease wait while I compose a viennese waltz for you.");
 
+                CreatePathArray(menuetPathArray, menuetFileArray, instrumentPlaying, "minuet");
+                CreatePathArray(trioPathArray, trioFileArray, instrumentPlaying, "trio");
 
-
-
-                string path = Path.Combine(currentDirectory, "Data", instrumentPlaying);
-                for (i = 0; i < menuetLength; i++)
-                {
-
-                    int firstRoll = dice.Roll();
-                    int secondRoll = dice.Roll();
-                    s = firstRoll + secondRoll;
-                    string instrumentPath = $"minuet{i}-{s}.wav";
-                    menuetPathArray[i] = Path.Combine(path, instrumentPath);
-                    menuetFileArray[i] = instrumentPath;
-
-                }
-                for (i = 0; i < trioLength; i++)
-                {
-
-                    int firstRoll = dice.Roll();
-                    s = firstRoll;
-                    string instrumentPath = $"trio{i}-{s}.wav";
-                    trioPathArray[i] = Path.Combine(path, instrumentPath);
-                    trioFileArray[i] = instrumentPath;
-                }
-                
-                
-                int foreachCounter = 0;
-                foreach (string sound in menuetPathArray)
-                {
-                    player.SoundLocation = sound;
-                    player.Load();
-                    player.PlaySync();
-                    ClearLine();
-                    Console.Write($"\rNow playing {menuetFileArray[foreachCounter]}");
-                    foreachCounter++;
-                    
-                }
-                
-                foreachCounter = 0;
-
-                foreach (string sound in trioPathArray)
-                {
-                    player.SoundLocation = sound;
-                    player.Load();
-                    player.PlaySync();
-                    ClearLine();
-                    Console.Write($"\rNow playing {trioFileArray[foreachCounter]}");
-                    foreachCounter++;
-                    
-                }
-
+                PlaySoundFromPathArray(menuetPathArray, menuetFileArray);
+                PlaySoundFromPathArray(trioPathArray, trioFileArray);
 
 
                 Console.WriteLine("\n\nTo end program press x, or press any key to play again.");
@@ -143,6 +93,69 @@ namespace MozartMusicalDiceGame
             Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, Console.CursorTop);
+        }
+
+
+
+        /// <summary>
+        /// Creates the paths for the sound files and saves them in the pathArray, while saving the individual file names in fileArray.
+        /// Also needs the current chosen instrument, and the type (Menuet or Trio)
+        /// Returns a completed pathArray and a completed fileArray.
+        /// </summary>
+        /// <param name="pathArray"></param>
+        /// <param name="fileArray"></param>
+        /// <param name="currentInstrument"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static (string[], string[]) CreatePathArray(string[] pathArray, string[] fileArray, string currentInstrument, string type)
+        {
+            int pathArrayLength = pathArray.Length;
+            Dice dice = new Dice();
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string path = Path.Combine(currentDirectory, "Data", currentInstrument);
+
+            
+            for (int i = 0; i < pathArrayLength; i++)
+            {
+                int s;
+                if (type == "minuet")
+                {
+                int firstRoll = dice.Roll();
+                int secondRoll = dice.Roll();
+                s = firstRoll + secondRoll;
+                }
+                else
+                {
+                    s = dice.Roll();
+                }
+                string instrumentPath = $"{type}{i}-{s}.wav";
+                pathArray[i] = Path.Combine(path, instrumentPath);
+                fileArray[i] = instrumentPath;
+            }
+            return (pathArray, fileArray);
+        }
+
+
+        // For at fjerne ligegyldige "soft errors"
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")] 
+        /// <summary>
+        /// Takes the pathArray and fileArray as parameters.
+        /// Plays the sounds files in the pathArray, while displaying the fileArray in the Console.
+        /// </summary>
+        public static void PlaySoundFromPathArray(string[] pathArray, string[] fileArray)
+        {
+            int foreachCounter = 0;
+            SoundPlayer player = new SoundPlayer();
+
+            foreach (string sound in pathArray)
+            {
+                player.SoundLocation = sound;
+                player.Load();
+                player.PlaySync();
+                ClearLine();
+                Console.Write($"\rNow playing {fileArray[foreachCounter]}");
+                foreachCounter++;
+            }
         }
     }
 }

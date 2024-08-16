@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MozartMusicalDiceGame")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a0c5e5db0685874e140f2cd95e1a4300a7db8895")]
 [assembly: System.Reflection.AssemblyProductAttribute("MozartMusicalDiceGame")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MozartMusicalDiceGame")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
